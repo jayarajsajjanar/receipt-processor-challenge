@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY requirements-test.txt .
 RUN pip install --no-cache-dir -r requirements-test.txt
 
-COPY app.py .
+# COPY app.py .
 COPY ./* .
 
 # Expose the port the app runs on
