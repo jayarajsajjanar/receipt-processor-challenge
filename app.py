@@ -11,7 +11,8 @@ from utils import calculate_points, handle_error, validate_request
 app = Flask(__name__)
 
 # todo: Use the newer Declarative style  # pylint:disable=fixme
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///example2.db"
+# In memory
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
 
 db.init_app(app)  # noqa: F405
 
