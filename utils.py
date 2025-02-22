@@ -141,7 +141,8 @@ def calculate_points(
 
     # 8. 10 points if the time of purchase is after 2:00pm and before 4:00pm
     if (
-        purchaseTime.hour >= 14 and purchaseTime.hour <= 16
+        purchaseTime > datetime.strptime("14:00", "%H:%M").time() and
+        purchaseTime < datetime.strptime("16:00", "%H:%M").time()
     ):  # inclusive based on given test
         points += 10
     logger.debug("points after 8, %d", points)
