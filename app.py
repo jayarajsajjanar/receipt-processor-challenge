@@ -39,7 +39,7 @@ def process_receipt():
         validate_request(data)
     except Exception as e:  # pylint:disable=broad-exception-caught
         logger.error("The receipt is invalid: %s \n %s", e, data)
-        return "The receipt is invalid", 400
+        return "The receipt is invalid.", 400
 
     # noqa: F405
     receipt = Receipt(  # noqa: F405
