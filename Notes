@@ -1,0 +1,45 @@
+Notes for my own reference
+
+1. Install virtual env related stuff
+
+brew install pyenv\n
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'\n
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc\n  echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc\n  echo 'eval "$(pyenv init - zsh)"' >> ~/.zshrc
+exec "$SHELL"\n
+pyenv versions
+pyenv install 3.10.4\n
+pyenv virtualenv 3.10.4 receipt-processor-challenge
+brew install pyenv-virtualenv
+pyenv activate receipt-processor-challenge
+pyenv local receipt-processor-challenge
+
+2. Docker commands
+docker stop $(docker ps -a -q)
+docker build -f Dockerfile-App -t receipt-processor-challenge-py10 .
+docker run --rm -it -d -p 8000:8000 --name receipt-processor-challenge-py10 -v /Users/jayaraj/Documents/code/receipt-processor-challenge:/app receipt-processor-challenge-py10
+
+2. Adhoc commands
+
+    sample_receipt = Receipt(
+        id="12345",
+        retailer="Sample Retailer",
+        purchaseDate=datetime.strptime("2020-01-01", "%Y-%m-%d").date(),
+        purchaseTime=datetime.strptime("12:00:00", "%H:%M:%S").time(),
+        total="100.00",
+        items=[
+            Item(short_description="Item 1", price="50.00"),
+            Item(short_description="Item 2", price="50.00"),
+        ],
+    )
+
+    root@b12f7686ba9e:/app# pytest tests.py
+
+    flask run
+
+    curl -X POST -H "Content-Type: application/json" -d '{"retailer": "Sample Retailer", "purchaseDate": "2020-01-01", "purchaseTime": "12:00", "total": "100.00", "items": [{"shortDescription": "Item 1", "price": "50.00"}, {"shortDescription": "Item 2", "price": "50.00"}]}' http://localhost:8000/receipts/process
+
+    pre-commit run --files $(git ls-files --others --exclude-standard)
+
+    curl -X POST -H "Content-Type: application/json" -d '{"retailer": "Target", "purchaseDate": "2022-01-01", "purchaseTime": "13:01", "items": [{"shortDescription": "Mountain Dew 12PK", "price": "6.49"}, {"shortDescription": "Emils Cheese Pizza", "price": "12.25"}, {"shortDescription": "Knorr Creamy Chicken", "price": "1.26"}, {"shortDescription": "Doritos Nacho Cheese", "price": "3.35"}, {"shortDescription": "   Klarbrunn 12-PK 12 FL OZ  ", "price": "12.00"}], "total": "35.35"}' http://localhost:8000/receipts/process
+
+    curl -X GET http://localhost:8000/receipts/<<<<>>>>>/points
